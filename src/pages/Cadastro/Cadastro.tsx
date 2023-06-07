@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, View } from 'react-native';
 import { HelperText, Text, TextInput } from 'react-native-paper';
 import { useNavigate } from 'react-router-native';
 import { Button } from '../../components/Button';
