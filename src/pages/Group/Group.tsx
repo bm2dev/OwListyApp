@@ -11,6 +11,7 @@ import { LoadingPage } from '../../components/LoadingPage';
 import { Navbar } from '../../components/Navbar/Navbar';
 import { useAuth } from '../../context/Auth';
 import { useAppTheme } from '../../context/Theme';
+import { errorToast } from '../../utils/errorToast';
 import { getContrastColor } from '../../utils/getContrastColor';
 import { ListItem } from './ListItem';
 
@@ -37,6 +38,7 @@ export function Group() {
 			setLists(listsData);
 		} catch (error) {
 			console.log(error);
+			errorToast(error);
 		} finally {
 			setLoading(false);
 		}

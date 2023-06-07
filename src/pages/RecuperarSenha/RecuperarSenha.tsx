@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Divider, HelperText, Text, TextInput } from 'react-native-paper';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { useNavigate } from 'react-router-native';
 import { apiOwListy } from '../../api/apiOwListy';
 import { Button } from '../../components/Button';
@@ -9,6 +10,7 @@ import { PasswordInput } from '../../components/PasswordInput';
 import { Row } from '../../components/Row';
 import { Stack } from '../../components/Stack';
 import { useAppTheme } from '../../context/Theme';
+import { errorToast } from '../../utils/errorToast';
 import { isEmailValid } from '../../utils/isEmailValid';
 
 export function RecuperarSenha() {
@@ -31,9 +33,13 @@ export function RecuperarSenha() {
 				email: formData.email,
 			};
 			await apiOwListy.post('/api/auth/password/forgot', payload);
+			Toast.show({
+				type: 'success',
+				text1: 'Código enviado!',
+			});
 		} catch (error) {
 			console.log(error);
-			console.log(error.response.data.message);
+			errorToast(error);
 		} finally {
 			setLoadingForgot(false);
 		}
@@ -54,9 +60,13 @@ export function RecuperarSenha() {
 				newPassword: '',
 				confirmPassword: '',
 			});
+			Toast.show({
+				type: 'success',
+				text1: 'Senha redefinida!',
+			});
 		} catch (error) {
 			console.log(error);
-			console.log(error.response.data.message);
+			errorToast(error);
 		} finally {
 			setLoadingReset(false);
 		}

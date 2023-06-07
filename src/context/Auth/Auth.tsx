@@ -6,6 +6,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-native';
 import { JwtContentType } from '../../@types';
 import { apiOwListy } from '../../api/apiOwListy';
+import { errorToast } from '../../utils/errorToast';
 
 type AuthContextTypes = {
 	user: JwtContentType | null;
@@ -40,8 +41,8 @@ export function AuthProvider({ children }) {
 			apiOwListy.defaults.headers.common.Authorization = `Bearer ${data.token}`;
 			navigate(from || '/', { replace: true });
 		} catch (error) {
-			console.log('error', error);
-			console.log('error', error.response.data.message);
+			console.log(error);
+			errorToast(error);
 		} finally {
 			setLoadingAuth(false);
 		}
@@ -58,8 +59,8 @@ export function AuthProvider({ children }) {
 			await apiOwListy.post('api/auth/register', payload);
 			login(formData.email, formData.password);
 		} catch (error) {
-			console.log('error', error);
-			console.log('error', error.response.data.message);
+			console.log(error);
+			errorToast(error);
 		} finally {
 			setLoadingAuth(false);
 		}
