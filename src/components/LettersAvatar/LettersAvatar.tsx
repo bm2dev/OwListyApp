@@ -1,6 +1,7 @@
 import { useAppTheme } from '../../context/Theme';
 //
 import { Avatar, AvatarTextProps } from 'react-native-paper';
+import { getContrastColor } from '../../utils/getContrastColor';
 
 export function LettersAvatar({ label, color, size = 35, style, ...props }: AvatarTextProps) {
 	const { colors } = useAppTheme();
@@ -19,7 +20,7 @@ export function LettersAvatar({ label, color, size = 35, style, ...props }: Avat
 			labelStyle={{ fontSize: size * 0.4 }}
 			style={[
 				{
-					backgroundColor: colors.primary,
+					backgroundColor: color ? getContrastColor(color) : colors.primary,
 				},
 				style,
 			]}
