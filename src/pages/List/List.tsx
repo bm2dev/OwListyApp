@@ -61,7 +61,6 @@ export function List() {
 				content: item.content,
 				completed: !item.completed,
 			};
-			console.log('payload', payload);
 
 			await apiOwListy.put('/api/lists/items/update', payload);
 		} catch (error) {
