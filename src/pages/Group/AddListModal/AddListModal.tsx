@@ -52,7 +52,7 @@ export function AddListModal({ open, closeModal, getLists, groupId }: AddListMod
 				</Text>
 
 				<TextInput
-					placeholder='Nome da Lista'
+					placeholder='Título da Lista'
 					mode='outlined'
 					value={formData.title}
 					onChangeText={(v) => setFormData((p) => ({ ...p, title: v }))}

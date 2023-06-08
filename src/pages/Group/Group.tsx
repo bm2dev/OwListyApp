@@ -1,7 +1,7 @@
 import { FlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
 import { RefreshControl, View } from 'react-native';
-import { Appbar, FAB, Text } from 'react-native-paper';
+import { Appbar, FAB, IconButton, Text } from 'react-native-paper';
 import { useNavigate, useParams } from 'react-router-native';
 import { GroupType, ListType } from '../../@types';
 import { apiOwListy } from '../../api/apiOwListy';
@@ -14,6 +14,7 @@ import { useAppTheme } from '../../context/Theme';
 import { errorToast } from '../../utils/errorToast';
 import { getContrastColor } from '../../utils/getContrastColor';
 import { AddListModal } from './AddListModal';
+import { EditGroupModal } from './EditGroupModal';
 import { Item } from './Item';
 
 export function Group() {
@@ -25,7 +26,8 @@ export function Group() {
 	const [loading, setLoading] = useState(true);
 	const [group, setGroup] = useState<GroupType | null>(null);
 	const [lists, setLists] = useState<ListType[]>([]);
-	const [modalOpen, setModalOpen] = useState(false);
+	const [modalAddOpen, setModalAddOpen] = useState(false);
+	const [modalEditOpen, setModalEditOpen] = useState(false);
 
 	const groupColor = group?.color || colors.primary;
 
@@ -46,8 +48,10 @@ export function Group() {
 		}
 	}
 
-	const openModal = () => setModalOpen(true);
-	const closeModal = () => setModalOpen(false);
+	const openAddModal = () => setModalAddOpen(true);
+	const closeAddModal = () => setModalAddOpen(false);
+	const openEditModal = () => setModalEditOpen(true);
+	const closeEditModal = () => setModalEditOpen(false);
 
 	useEffect(() => {
 		getLists(true);
@@ -58,15 +62,27 @@ export function Group() {
 	return (
 		<Container>
 			<AddListModal
-				open={modalOpen}
+				open={modalAddOpen}
 				getLists={getLists}
-				closeModal={closeModal}
+				closeModal={closeAddModal}
 				groupId={groupId}
+			/>
+
+			<EditGroupModal
+				open={modalEditOpen}
+				getLists={getLists}
+				closeModal={closeEditModal}
+				group={group}
 			/>
 
 			<Navbar style={{ backgroundColor: groupColor }}>
 				<Appbar.BackAction color={getContrastColor(groupColor)} onPress={() => navigate(-1)} />
 				<Appbar.Content color={getContrastColor(groupColor)} title={group.name} />
+				<IconButton
+					icon='pencil'
+					iconColor={getContrastColor(groupColor)}
+					onPress={openEditModal}
+				/>
 				<LettersAvatar
 					label={user.name}
 					size={35}
@@ -100,7 +116,7 @@ export function Group() {
 					zIndex: 2,
 					backgroundColor: groupColor,
 				}}
-				onPress={openModal}
+				onPress={openAddModal}
 			/>
 		</Container>
 	);
