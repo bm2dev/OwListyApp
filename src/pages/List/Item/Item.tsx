@@ -94,7 +94,11 @@ export function Item({ item, listItems, setListItems, getListItems }: ItemProps)
 			anchor={
 				<View>
 					{!editMode ? (
-						<TouchableOpacity onPress={toggleItemCompleted} onLongPress={openMenu}>
+						<TouchableOpacity
+							onPress={toggleItemCompleted}
+							onLongPress={openMenu}
+							delayLongPress={100}
+						>
 							<View
 								style={{
 									padding: 10,

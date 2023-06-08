@@ -1,7 +1,7 @@
 import { FlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
 import { RefreshControl, View } from 'react-native';
-import { Appbar, FAB, Text } from 'react-native-paper';
+import { Appbar, FAB, IconButton, Text } from 'react-native-paper';
 import { useNavigate, useParams } from 'react-router-native';
 import { ListItemType, ListType } from '../../@types';
 import { apiOwListy } from '../../api/apiOwListy';
@@ -14,6 +14,7 @@ import { useAppTheme } from '../../context/Theme';
 import { errorToast } from '../../utils/errorToast';
 import { getContrastColor } from '../../utils/getContrastColor';
 import { AddListItemModal } from './AddListItemModal';
+import { EditListModal } from './EditListModal';
 import { Item } from './Item';
 
 export function List() {
@@ -25,7 +26,8 @@ export function List() {
 	const [loading, setLoading] = useState(true);
 	const [list, setList] = useState<ListType | null>(null);
 	const [listItems, setListItems] = useState<ListItemType[]>([]);
-	const [modalOpen, setModalOpen] = useState(false);
+	const [modalAddOpen, setModalAddOpen] = useState(false);
+	const [modalEditOpen, setModalEditOpen] = useState(false);
 
 	const listColor = list?.color || colors.primary;
 
@@ -47,8 +49,10 @@ export function List() {
 		}
 	}
 
-	const openModal = () => setModalOpen(true);
-	const closeModal = () => setModalOpen(false);
+	const openAddModal = () => setModalAddOpen(true);
+	const closeAddModal = () => setModalAddOpen(false);
+	const openEditModal = () => setModalEditOpen(true);
+	const closeEditModal = () => setModalEditOpen(false);
 
 	useEffect(() => {
 		getListItems(true);
@@ -59,15 +63,23 @@ export function List() {
 	return (
 		<Container>
 			<AddListItemModal
-				open={modalOpen}
+				open={modalAddOpen}
 				getListItems={getListItems}
-				closeModal={closeModal}
+				closeModal={closeAddModal}
 				listId={listId}
+			/>
+
+			<EditListModal
+				open={modalEditOpen}
+				getListItems={getListItems}
+				closeModal={closeEditModal}
+				list={list}
 			/>
 
 			<Navbar style={{ backgroundColor: listColor }}>
 				<Appbar.BackAction color={getContrastColor(listColor)} onPress={() => navigate(-1)} />
 				<Appbar.Content color={getContrastColor(listColor)} title={list.title} />
+				<IconButton icon='pencil' iconColor={getContrastColor(listColor)} onPress={openEditModal} />
 				<LettersAvatar
 					label={user.name}
 					size={35}
@@ -109,7 +121,7 @@ export function List() {
 					zIndex: 2,
 					backgroundColor: listColor,
 				}}
-				onPress={openModal}
+				onPress={openAddModal}
 			/>
 		</Container>
 	);
