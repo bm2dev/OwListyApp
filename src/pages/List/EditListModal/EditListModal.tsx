@@ -79,6 +79,7 @@ export function EditListModal({ open, closeModal, getListItems, list }: EditList
 				</Text>
 
 				<TextInput
+					label='Título da Lista'
 					placeholder='Título da Lista'
 					mode='outlined'
 					value={formData.title}

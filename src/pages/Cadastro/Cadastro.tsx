@@ -17,7 +17,7 @@ export function Cadastro() {
 	const { colors } = useAppTheme();
 
 	const [formData, setFormData] = useState({
-		title: '',
+		name: '',
 		email: '',
 		password: '',
 		confirmPassword: '',
@@ -49,14 +49,16 @@ export function Cadastro() {
 					</Text>
 				</View>
 				<TextInput
-					placeholder='Nome'
+					label='Nome'
+					placeholder='Seu Nome Completo'
 					mode='outlined'
 					value={formData.name}
 					onChangeText={(v) => setFormData((p) => ({ ...p, name: v }))}
 				/>
 				<View style={{ marginBottom: -25 }}>
 					<TextInput
-						placeholder='Email'
+						label='Email'
+						placeholder='seu@email.com'
 						mode='outlined'
 						keyboardType='email-address'
 						autoComplete='email'
@@ -70,7 +72,8 @@ export function Cadastro() {
 				</View>
 				<View style={{ marginBottom: -25 }}>
 					<PasswordInput
-						placeholder='Senha'
+						label='Senha'
+						placeholder='******'
 						mode='outlined'
 						secureTextEntry
 						value={formData.password}
@@ -80,7 +83,8 @@ export function Cadastro() {
 				</View>
 				<View style={{ marginBottom: -25 }}>
 					<PasswordInput
-						placeholder='Confirmar Senha'
+						label='Confirme sua senha'
+						placeholder='******'
 						mode='outlined'
 						secureTextEntry
 						value={formData.confirmPassword}

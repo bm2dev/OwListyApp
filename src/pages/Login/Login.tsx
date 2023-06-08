@@ -35,7 +35,8 @@ export function Login() {
 					</Text>
 				</View>
 				<TextInput
-					placeholder='Email'
+					label='Email'
+					placeholder='seu@email.com'
 					mode='outlined'
 					keyboardType='email-address'
 					autoComplete='email'
@@ -44,7 +45,8 @@ export function Login() {
 				/>
 				<View>
 					<PasswordInput
-						placeholder='Senha'
+						label='Senha'
+						placeholder='******'
 						mode='outlined'
 						secureTextEntry
 						value={formData.password}

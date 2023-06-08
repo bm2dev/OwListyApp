@@ -52,6 +52,7 @@ export function AddListModal({ open, closeModal, getLists, groupId }: AddListMod
 				</Text>
 
 				<TextInput
+					label='Título da Lista'
 					placeholder='Título da Lista'
 					mode='outlined'
 					value={formData.title}

@@ -79,6 +79,7 @@ export function EditGroupModal({ open, closeModal, getLists, group }: EditGroupM
 				</Text>
 
 				<TextInput
+					label='Nome do grupo'
 					placeholder='Nome do grupo'
 					mode='outlined'
 					value={formData.name}
