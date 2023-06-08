@@ -6,13 +6,14 @@ import { useAppTheme } from '../../../context/Theme';
 
 interface ItemProps {
 	item: ListItemType;
+	toggleItemCompleted: (item: ListItemType) => void;
 }
 
-export function Item({ item }: ItemProps) {
+export function Item({ item, toggleItemCompleted }: ItemProps) {
 	const { colors } = useAppTheme();
 
 	return (
-		<TouchableOpacity style={{ borderRadius: 5 }} onPress={() => {}}>
+		<TouchableOpacity style={{ borderRadius: 5 }} onPress={() => toggleItemCompleted(item)}>
 			<View
 				style={{
 					padding: 10,

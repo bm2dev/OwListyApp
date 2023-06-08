@@ -24,7 +24,7 @@ export function List() {
 
 	const [loading, setLoading] = useState(true);
 	const [list, setList] = useState<ListType | null>(null);
-	const [listsItems, setListItems] = useState<ListItemType[]>([]);
+	const [listItems, setListItems] = useState<ListItemType[]>([]);
 	const [modalOpen, setModalOpen] = useState(false);
 
 	const listColor = list?.color || colors.primary;
@@ -44,6 +44,36 @@ export function List() {
 			errorToast(error);
 		} finally {
 			setLoading(false);
+		}
+	}
+
+	async function toggleItemCompleted(item: ListItemType) {
+		const originalListItems = listItems;
+
+		try {
+			const updatedListItems = listItems.map((listItem) => {
+				if (listItem.id === item.id) {
+					return {
+						...listItem,
+						completed: !listItem.completed,
+					};
+				}
+				return listItem;
+			});
+			setListItems(updatedListItems);
+
+			let payload = {
+				id: item.id,
+				content: item.content,
+				completed: !item.completed,
+			};
+			console.log('payload', payload);
+
+			await apiOwListy.put('/api/lists/items/update', payload);
+		} catch (error) {
+			console.log(error);
+			setListItems(originalListItems);
+			errorToast(error);
 		}
 	}
 
@@ -84,9 +114,11 @@ export function List() {
 						</Text>
 					}
 					refreshControl={<RefreshControl refreshing={loading} onRefresh={getListItems} />}
-					renderItem={({ item }) => <Item key={item.id} item={item} />}
+					renderItem={({ item }) => (
+						<Item key={item.id} item={item} toggleItemCompleted={toggleItemCompleted} />
+					)}
 					estimatedItemSize={99}
-					data={listsItems.reverse()}
+					data={listItems}
 				/>
 			</View>
 			<FAB
