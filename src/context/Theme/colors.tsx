@@ -1,7 +1,7 @@
 export const colors = {
 	light: {
 		primary: 'rgb(65, 164, 242)',
-		onPrimary: 'rgb(0, 0, 0)',
+		onPrimary: 'rgb(255, 255, 255)',
 		primaryContainer: 'rgb(7, 129, 223)',
 		onPrimaryContainer: 'rgb(104, 184, 255)',
 		secondary: 'rgb(52, 92, 168)',
@@ -39,7 +39,7 @@ export const colors = {
 		},
 		surfaceDisabled: 'rgba(32, 26, 24, 0.12)',
 		onSurfaceDisabled: 'rgba(32, 26, 24, 0.38)',
-		backdrop: 'rgba(59, 45, 40, 0.4)',
+		backdrop: 'rgba(0, 0, 0, 0.75)',
 		success: 'rgb(0, 186, 53)',
 		onSuccess: 'rgb(255, 255, 255)',
 		successContainer: 'rgb(116, 224, 146)',
@@ -55,7 +55,7 @@ export const colors = {
 	},
 	dark: {
 		primary: 'rgb(65, 164, 242)',
-		onPrimary: 'rgb(0, 0, 0)',
+		onPrimary: 'rgb(255, 255, 255)',
 		primaryContainer: 'rgb(7, 129, 223)',
 		onPrimaryContainer: 'rgb(104, 184, 255)',
 		secondary: 'rgb(175, 198, 255)',
@@ -93,7 +93,7 @@ export const colors = {
 		},
 		surfaceDisabled: 'rgba(237, 224, 219, 0.12)',
 		onSurfaceDisabled: 'rgba(237, 224, 219, 0.38)',
-		backdrop: 'rgba(59, 46, 40, 0.4)',
+		backdrop: 'rgba(255, 255, 255, 0.3)',
 		success: 'rgb(23, 203, 73)',
 		onSuccess: 'rgb(255, 255, 255)',
 		successContainer: 'rgb(1, 113, 30)',

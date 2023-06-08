@@ -17,7 +17,7 @@ export function Cadastro() {
 	const { colors } = useAppTheme();
 
 	const [formData, setFormData] = useState({
-		name: '',
+		title: '',
 		email: '',
 		password: '',
 		confirmPassword: '',

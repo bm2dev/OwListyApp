@@ -22,7 +22,7 @@ export function getContrastColor(color: string): '#FFFFFF' | '#000000' {
 
 	const brightness = (red * 299 + green * 587 + blue * 114) / 1000;
 
-	return brightness >= 128 ? '#000000' : '#FFFFFF';
+	return brightness >= 130 ? '#000000' : '#FFFFFF';
 }
 
 function rgbToHex(red: number, green: number, blue: number): string {

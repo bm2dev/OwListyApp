@@ -1,7 +1,7 @@
 import { FlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
 import { RefreshControl, View } from 'react-native';
-import { Appbar } from 'react-native-paper';
+import { Appbar, FAB, Text } from 'react-native-paper';
 import { useNavigate, useParams } from 'react-router-native';
 import { ListItemType, ListType } from '../../@types';
 import { apiOwListy } from '../../api/apiOwListy';
@@ -13,6 +13,7 @@ import { useAuth } from '../../context/Auth';
 import { useAppTheme } from '../../context/Theme';
 import { errorToast } from '../../utils/errorToast';
 import { getContrastColor } from '../../utils/getContrastColor';
+import { AddListItemModal } from './AddListItemModal';
 import { ListItem } from './ListItem';
 
 export function List() {
@@ -24,6 +25,7 @@ export function List() {
 	const [loading, setLoading] = useState(true);
 	const [list, setList] = useState<ListType | null>(null);
 	const [listsItems, setListItems] = useState<ListItemType[]>([]);
+	const [modalOpen, setModalOpen] = useState(false);
 
 	const listColor = list?.color || colors.primary;
 
@@ -45,6 +47,9 @@ export function List() {
 		}
 	}
 
+	const openModal = () => setModalOpen(true);
+	const closeModal = () => setModalOpen(false);
+
 	useEffect(() => {
 		getListItems(true);
 	}, []);
@@ -53,6 +58,13 @@ export function List() {
 
 	return (
 		<Container>
+			<AddListItemModal
+				open={modalOpen}
+				getListItems={getListItems}
+				closeModal={closeModal}
+				listId={listId}
+			/>
+
 			<Navbar style={{ backgroundColor: listColor }}>
 				<Appbar.BackAction color={getContrastColor(listColor)} onPress={() => navigate(-1)} />
 				<Appbar.Content color={getContrastColor(listColor)} title={list.title} />
@@ -65,12 +77,32 @@ export function List() {
 			</Navbar>
 			<View style={{ flex: 1 }}>
 				<FlashList
+					ListEmptyComponent={
+						<Text variant='titleMedium' style={{ marginTop: 10, textAlign: 'center' }}>
+							Parece que esta lista não possui nenhum item.{'\n'}Crie um novo item apertando no
+							botão "+"
+						</Text>
+					}
 					refreshControl={<RefreshControl refreshing={loading} onRefresh={getListItems} />}
 					renderItem={({ item }) => <ListItem key={item.id} item={item} />}
 					estimatedItemSize={99}
 					data={listsItems}
 				/>
 			</View>
+			<FAB
+				mode='flat'
+				icon='plus'
+				color={getContrastColor(listColor)}
+				style={{
+					position: 'absolute',
+					margin: 16,
+					right: 0,
+					bottom: 0,
+					zIndex: 2,
+					backgroundColor: listColor,
+				}}
+				onPress={openModal}
+			/>
 		</Container>
 	);
 }

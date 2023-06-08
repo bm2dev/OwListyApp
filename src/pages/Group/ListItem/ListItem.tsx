@@ -66,6 +66,8 @@ export function ListItem({ item }: ListItemProps) {
 									textDecorationLine: i.completed ? 'line-through' : 'none',
 									opacity: i.completed ? 0.5 : 1,
 								}}
+								numberOfLines={1}
+								ellipsizeMode='tail'
 							>
 								• {i.content}
 							</Text>
