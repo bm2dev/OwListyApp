@@ -14,7 +14,7 @@ import { useAppTheme } from '../../context/Theme';
 import { errorToast } from '../../utils/errorToast';
 import { getContrastColor } from '../../utils/getContrastColor';
 import { AddListItemModal } from './AddListItemModal';
-import { ListItem } from './ListItem';
+import { Item } from './Item';
 
 export function List() {
 	const { listId } = useParams();
@@ -84,9 +84,9 @@ export function List() {
 						</Text>
 					}
 					refreshControl={<RefreshControl refreshing={loading} onRefresh={getListItems} />}
-					renderItem={({ item }) => <ListItem key={item.id} item={item} />}
+					renderItem={({ item }) => <Item key={item.id} item={item} />}
 					estimatedItemSize={99}
-					data={listsItems}
+					data={listsItems.reverse()}
 				/>
 			</View>
 			<FAB

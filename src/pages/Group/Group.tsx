@@ -14,7 +14,7 @@ import { useAppTheme } from '../../context/Theme';
 import { errorToast } from '../../utils/errorToast';
 import { getContrastColor } from '../../utils/getContrastColor';
 import { AddListModal } from './AddListModal';
-import { ListItem } from './ListItem';
+import { Item } from './Item';
 
 export function Group() {
 	const { groupId } = useParams();
@@ -83,7 +83,7 @@ export function Group() {
 						</Text>
 					}
 					refreshControl={<RefreshControl refreshing={loading} onRefresh={getLists} />}
-					renderItem={({ item }) => <ListItem key={item.id} item={item} />}
+					renderItem={({ item }) => <Item key={item.id} item={item} />}
 					estimatedItemSize={99}
 					data={lists}
 				/>

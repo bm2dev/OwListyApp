@@ -4,11 +4,11 @@ import { ListItemType } from '../../../@types';
 import { Row } from '../../../components/Row';
 import { useAppTheme } from '../../../context/Theme';
 
-interface ListItemProps {
+interface ItemProps {
 	item: ListItemType;
 }
 
-export function ListItem({ item }: ListItemProps) {
+export function Item({ item }: ItemProps) {
 	const { colors } = useAppTheme();
 
 	return (

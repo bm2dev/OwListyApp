@@ -13,7 +13,7 @@ import { useAuth } from '../../context/Auth';
 import { useAppTheme } from '../../context/Theme';
 import { errorToast } from '../../utils/errorToast';
 import { AddGroupModal } from './AddGroupModal';
-import { ListItem } from './ListItem';
+import { Item } from './Item';
 
 export function Groups() {
 	const { user, signOut } = useAuth();
@@ -63,7 +63,7 @@ export function Groups() {
 						</Text>
 					}
 					refreshControl={<RefreshControl refreshing={loading} onRefresh={getGroups} />}
-					renderItem={({ item }) => <ListItem key={item.id} item={item} />}
+					renderItem={({ item }) => <Item key={item.id} item={item} />}
 					estimatedItemSize={103}
 					data={groups}
 				/>

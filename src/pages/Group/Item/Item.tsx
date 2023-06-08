@@ -6,11 +6,11 @@ import { ListType } from '../../../@types';
 import { Row } from '../../../components/Row';
 import { useAppTheme } from '../../../context/Theme';
 
-interface ListItemProps {
+interface ItemProps {
 	item: ListType;
 }
 
-export function ListItem({ item }: ListItemProps) {
+export function Item({ item }: ItemProps) {
 	const { colors } = useAppTheme();
 	const navigate = useNavigate();
 
@@ -25,7 +25,6 @@ export function ListItem({ item }: ListItemProps) {
 			<View
 				style={{
 					padding: 10,
-					paddingTop: 5,
 					borderLeftWidth: 5,
 					borderLeftColor: item.color || colors.primary,
 					borderRadius: 5,
@@ -33,14 +32,6 @@ export function ListItem({ item }: ListItemProps) {
 					marginVertical: 5,
 				}}
 			>
-				<Row style={{ justifyContent: 'space-between' }}>
-					<Text variant='bodySmall' style={{ color: colors.outlineVariant, fontWeight: 'bold' }}>
-						{moment(item.createdAt).format('L')}
-					</Text>
-					<Text variant='bodySmall' style={{ color: colors.outlineVariant, fontWeight: 'bold' }}>
-						{moment(item.updatedAt).calendar()}
-					</Text>
-				</Row>
 				<Text
 					variant='headlineSmall'
 					style={{ fontWeight: 'bold', color: item.color || colors.primary }}
@@ -76,6 +67,14 @@ export function ListItem({ item }: ListItemProps) {
 						<Text variant='labelLarge'>Sem itens...</Text>
 					)}
 				</View>
+				<Row style={{ justifyContent: 'space-between', marginTop: 10 }}>
+					<Text variant='bodySmall' style={{ color: colors.outlineVariant, fontWeight: 'bold' }}>
+						{moment(item.createdAt).format('L')}
+					</Text>
+					<Text variant='bodySmall' style={{ color: colors.outlineVariant, fontWeight: 'bold' }}>
+						{moment(item.updatedAt).calendar()}
+					</Text>
+				</Row>
 			</View>
 		</TouchableOpacity>
 	);
