@@ -7,13 +7,16 @@ export function Modal({ children, contentContainerStyle, ...props }: ModalProps)
 	return (
 		<Portal>
 			<ModalPaper
-				contentContainerStyle={{
-					flex: 1,
-					marginVertical: 50,
-					marginHorizontal: 20,
-					borderRadius: 5,
-					backgroundColor: colors.surface,
-				}}
+				contentContainerStyle={[
+					{
+						padding: 20,
+						marginVertical: 50,
+						marginHorizontal: 20,
+						borderRadius: 5,
+						backgroundColor: colors.surface,
+					},
+					contentContainerStyle,
+				]}
 				{...props}
 			>
 				{children}

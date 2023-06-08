@@ -51,8 +51,8 @@ export function AddListItemModal({
 
 	return (
 		<Modal visible={open} onDismiss={closeModal}>
-			<Stack spacing={5} style={{ paddingHorizontal: 20 }}>
-				<Text variant='headlineLarge' style={{ color: colors.primary, textAlign: 'center' }}>
+			<Stack spacing={5}>
+				<Text variant='headlineSmall' style={{ color: colors.primary }}>
 					Criar Item
 				</Text>
 

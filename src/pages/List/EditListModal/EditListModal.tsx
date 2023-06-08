@@ -35,12 +35,12 @@ export function EditListModal({ open, closeModal, getListItems, list }: EditList
 			};
 
 			await apiOwListy.put('/api/lists/update', payload);
+			closeModal();
+			getListItems();
 			Toast.show({
 				type: 'success',
 				text1: 'Lista editada!',
 			});
-			closeModal();
-			getListItems();
 		} catch (error) {
 			console.log(error);
 			errorToast(error);
@@ -57,12 +57,12 @@ export function EditListModal({ open, closeModal, getListItems, list }: EditList
 			};
 
 			await apiOwListy.delete('/api/lists/delete', { data: payload });
+			closeModal();
+			navigate(-1);
 			Toast.show({
 				type: 'success',
 				text1: 'Lista deletada!',
 			});
-			closeModal();
-			navigate(-1);
 		} catch (error) {
 			console.log(error);
 			errorToast(error);
@@ -73,8 +73,8 @@ export function EditListModal({ open, closeModal, getListItems, list }: EditList
 
 	return (
 		<Modal visible={open} onDismiss={closeModal}>
-			<Stack spacing={5} style={{ paddingHorizontal: 20 }}>
-				<Text variant='headlineLarge' style={{ color: colors.primary, textAlign: 'center' }}>
+			<Stack spacing={5}>
+				<Text variant='headlineSmall' style={{ color: colors.primary }}>
 					Editar Lista
 				</Text>
 

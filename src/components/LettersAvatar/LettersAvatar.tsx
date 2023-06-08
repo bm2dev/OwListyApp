@@ -3,8 +3,33 @@ import { useAppTheme } from '../../context/Theme';
 import { Avatar, AvatarTextProps } from 'react-native-paper';
 import { getContrastColor } from '../../utils/getContrastColor';
 
-export function LettersAvatar({ label, color, size = 35, style, ...props }: AvatarTextProps) {
+interface LettersAvatarProps extends AvatarTextProps {
+	inverseColors?: boolean;
+}
+
+export function LettersAvatar({
+	label,
+	color,
+	size = 35,
+	style,
+	inverseColors,
+	...props
+}: LettersAvatarProps) {
 	const { colors } = useAppTheme();
+
+	const textColor =
+		!inverseColors && !!color
+			? color
+			: inverseColors && !!color
+			? getContrastColor(color)
+			: colors.onPrimary;
+
+	const backgroundColor =
+		!inverseColors && !!color
+			? getContrastColor(color)
+			: inverseColors && !!color
+			? color
+			: colors.primary;
 
 	return (
 		<Avatar.Text
@@ -16,11 +41,11 @@ export function LettersAvatar({ label, color, size = 35, style, ...props }: Avat
 							[label.split(' ').length - 1][0].toUpperCase()}`
 					: '?'
 			}
-			color={color || colors.onPrimary}
+			color={textColor}
 			labelStyle={{ fontSize: size * 0.4 }}
 			style={[
 				{
-					backgroundColor: color ? getContrastColor(color) : colors.primary,
+					backgroundColor: backgroundColor,
 				},
 				style,
 			]}
