@@ -1,6 +1,5 @@
-import { FlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
-import { RefreshControl, View } from 'react-native';
+import { FlatList, RefreshControl, View } from 'react-native';
 import { Appbar, FAB, IconButton, Text } from 'react-native-paper';
 import { useNavigate, useParams } from 'react-router-native';
 import { ListItemType, ListType } from '../../@types';
@@ -88,7 +87,7 @@ export function List() {
 				/>
 			</Navbar>
 			<View style={{ flex: 1 }}>
-				<FlashList
+				<FlatList
 					ListEmptyComponent={
 						<Text variant='titleMedium' style={{ marginTop: 10, textAlign: 'center' }}>
 							Parece que esta lista não possui nenhum item.{'\n'}Crie um novo item apertando no
@@ -105,7 +104,6 @@ export function List() {
 							getListItems={getListItems}
 						/>
 					)}
-					estimatedItemSize={99}
 					data={listItems}
 				/>
 			</View>

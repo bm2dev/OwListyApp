@@ -1,6 +1,5 @@
-import { FlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
-import { RefreshControl, View } from 'react-native';
+import { FlatList, RefreshControl, View } from 'react-native';
 import { Appbar, FAB, Text } from 'react-native-paper';
 import { GroupType } from '../../@types';
 import { apiOwListy } from '../../api/apiOwListy';
@@ -55,7 +54,7 @@ export function Groups() {
 				<LettersAvatar label={user.name} size={35} style={{ marginHorizontal: 10 }} />
 			</Navbar>
 			<View style={{ padding: 10, flex: 1 }}>
-				<FlashList
+				<FlatList
 					ListEmptyComponent={
 						<Text variant='titleMedium' style={{ marginTop: 10, textAlign: 'center' }}>
 							Parece que você não está em nenhum grupo.{'\n'}Crie um novo grupo apertando no botão
@@ -64,7 +63,6 @@ export function Groups() {
 					}
 					refreshControl={<RefreshControl refreshing={loading} onRefresh={getGroups} />}
 					renderItem={({ item }) => <Item key={item.id} item={item} />}
-					estimatedItemSize={103}
 					data={groups}
 				/>
 				<View style={{ flexDirection: 'row', justifyContent: 'center' }}>

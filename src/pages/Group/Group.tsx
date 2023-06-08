@@ -1,6 +1,5 @@
-import { FlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
-import { RefreshControl, View } from 'react-native';
+import { FlatList, RefreshControl, View } from 'react-native';
 import { Appbar, FAB, IconButton, Text } from 'react-native-paper';
 import { useNavigate, useParams } from 'react-router-native';
 import { GroupType, ListType } from '../../@types';
@@ -91,7 +90,7 @@ export function Group() {
 				/>
 			</Navbar>
 			<View style={{ padding: 10, flex: 1 }}>
-				<FlashList
+				<FlatList
 					ListEmptyComponent={
 						<Text variant='titleMedium' style={{ marginTop: 10, textAlign: 'center' }}>
 							Parece que este grupo não possui nenhuma lista.{'\n'}Crie uma nova lista apertando no
@@ -100,7 +99,6 @@ export function Group() {
 					}
 					refreshControl={<RefreshControl refreshing={loading} onRefresh={getLists} />}
 					renderItem={({ item }) => <Item key={item.id} item={item} />}
-					estimatedItemSize={99}
 					data={lists}
 				/>
 			</View>
