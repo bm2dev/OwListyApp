@@ -51,15 +51,9 @@ export function List() {
 		const originalListItems = listItems;
 
 		try {
-			const updatedListItems = listItems.map((listItem) => {
-				if (listItem.id === item.id) {
-					return {
-						...listItem,
-						completed: !listItem.completed,
-					};
-				}
-				return listItem;
-			});
+			const updatedListItems = listItems.map((listItem) =>
+				listItem.id === item.id ? { ...listItem, completed: !listItem.completed } : listItem
+			);
 			setListItems(updatedListItems);
 
 			let payload = {
