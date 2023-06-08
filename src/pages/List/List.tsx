@@ -47,29 +47,6 @@ export function List() {
 		}
 	}
 
-	async function toggleItemCompleted(item: ListItemType) {
-		const originalListItems = listItems;
-
-		try {
-			const updatedListItems = listItems.map((listItem) =>
-				listItem.id === item.id ? { ...listItem, completed: !listItem.completed } : listItem
-			);
-			setListItems(updatedListItems);
-
-			let payload = {
-				id: item.id,
-				content: item.content,
-				completed: !item.completed,
-			};
-
-			await apiOwListy.put('/api/lists/items/update', payload);
-		} catch (error) {
-			console.log(error);
-			setListItems(originalListItems);
-			errorToast(error);
-		}
-	}
-
 	const openModal = () => setModalOpen(true);
 	const closeModal = () => setModalOpen(false);
 
@@ -108,7 +85,13 @@ export function List() {
 					}
 					refreshControl={<RefreshControl refreshing={loading} onRefresh={getListItems} />}
 					renderItem={({ item }) => (
-						<Item key={item.id} item={item} toggleItemCompleted={toggleItemCompleted} />
+						<Item
+							key={item.id}
+							item={item}
+							listItems={listItems}
+							setListItems={setListItems}
+							getListItems={getListItems}
+						/>
 					)}
 					estimatedItemSize={99}
 					data={listItems}
